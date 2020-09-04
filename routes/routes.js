@@ -9,4 +9,6 @@ transactionRouter.post('/', transactionController.create);
 
 transactionRouter.put('/:id', transactionController.update);
 
+transactionRouter.delete('/:id', transactionController.remove);
+
 module.exports = transactionRouter;
