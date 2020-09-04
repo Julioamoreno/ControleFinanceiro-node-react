@@ -7,4 +7,6 @@ transactionRouter.get('/', transactionController.find);
 
 transactionRouter.post('/', transactionController.create);
 
+transactionRouter.put('/:id', transactionController.update);
+
 module.exports = transactionRouter;
