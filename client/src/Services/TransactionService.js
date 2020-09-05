@@ -1,7 +1,7 @@
 import http from '../http-common';
 
-const get = period => {
-	return http.get(`/api/transactio/${period}`);
+const get = async period => {
+	return await http.get(`/api/transaction?period=${period}`);
 };
 
 const create = data => {
