@@ -4,6 +4,7 @@ import './app.css';
 
 import api from './Services/TransactionService';
 import Transaction from './Components/Transaction';
+import NewTransactionModal from './Components/NewTransactionModal';
 
 export default function App() {
 	const [transactions, setTransactions] = useState([]);
@@ -48,6 +49,7 @@ export default function App() {
 	]);
 	const [receita, setReceita] = useState(0);
 	const [despesa, setDespesa] = useState(0);
+	const [modalIsOpen, setIsOpen] = useState(false);
 
 	useEffect(() => {
 		const auto = async () => {
@@ -74,6 +76,14 @@ export default function App() {
 
 	const changeMonth = event => {
 		setPeriod(event.target.value);
+	};
+
+	const clickNovoLancamento = () => {
+		setIsOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsOpen(false);
 	};
 
 	return (
@@ -144,7 +154,10 @@ export default function App() {
 			</div>
 
 			<div className="search-bar">
-				<button className="waves-effect waves-light btn">
+				<button
+					className="waves-effect waves-light btn"
+					onClick={clickNovoLancamento}
+				>
 					+ Novo lançamento
 				</button>
 				<div className="input-field search">
@@ -173,6 +186,12 @@ export default function App() {
 						/>
 					);
 				})}
+				<NewTransactionModal
+					modalIsOpen={modalIsOpen}
+					closeModal={closeModal}
+					// style={customStyles}
+					contentLabel="Example Modal"
+				/>
 			</div>
 		</div>
 	);
