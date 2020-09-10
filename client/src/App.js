@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 
 import './app.css';
 
@@ -8,8 +9,8 @@ import NewTransactionModal from './Components/NewTransactionModal';
 
 export default function App() {
 	const [transactions, setTransactions] = useState([]);
-	const [period, setPeriod] = useState('2020-09');
-	const [allMonth, setAllMonth] = useState([
+	const [period, setPeriod] = useState(moment().format('YYYY-MM'));
+	const [allMonth] = useState([
 		{ yearMonth: '2019-01', month: '01', year: '2019' },
 		{ yearMonth: '2019-02', month: '02', year: '2019' },
 		{ yearMonth: '2019-03', month: '03', year: '2019' },
@@ -56,23 +57,30 @@ export default function App() {
 			const response = await api.get(period);
 			setTransactions(response.data);
 			console.log(response.data);
-			const despesa = response.data.reduce((acc, { value, type }) => {
-				if (type === '-') {
-					return acc + value;
-				}
-				return acc;
-			}, 0);
-			setDespesa(despesa);
-			const receita = response.data.reduce((acc, { value, type }) => {
-				if (type === '+') {
-					return acc + value;
-				}
-				return acc;
-			}, 0);
-			setReceita(receita);
+			countDespesas(response);
+			countReceitas(response);
 		};
 		auto();
-	}, [period]);
+	}, [period, modalIsOpen]);
+
+	const countDespesas = response => {
+		const despesa = response.data.reduce((acc, { value, type }) => {
+			if (type === '-') {
+				return acc + value;
+			}
+			return acc;
+		}, 0);
+		setDespesa(despesa);
+	};
+	const countReceitas = response => {
+		const receita = response.data.reduce((acc, { value, type }) => {
+			if (type === '+') {
+				return acc + value;
+			}
+			return acc;
+		}, 0);
+		setReceita(receita);
+	};
 
 	const changeMonth = event => {
 		setPeriod(event.target.value);
@@ -109,6 +117,7 @@ export default function App() {
 					name="month"
 					id="month"
 					onChange={changeMonth}
+					value={period}
 				>
 					{allMonth &&
 						allMonth.map((month, idx) => {
@@ -165,9 +174,10 @@ export default function App() {
 				</div>
 			</div>
 			<div className="center">
-				{transactions.map(transaction => {
+				{transactions.map((transaction, idx) => {
 					return (
 						<Transaction
+							key={idx}
 							day={transaction.day.toLocaleString('pt-br', {
 								minimumIntegerDigits: 2,
 							})}
@@ -189,7 +199,6 @@ export default function App() {
 				<NewTransactionModal
 					modalIsOpen={modalIsOpen}
 					closeModal={closeModal}
-					// style={customStyles}
 					contentLabel="Example Modal"
 				/>
 			</div>
