@@ -1,9 +1,14 @@
-# Onde Gastei?
+# Como Gastei
+## Aplicação web para controle financeiro
 
 > Controle de finanças pessoais, onde se pode adicionar seus gastos
 > diários e seus ganhos, a aplicação calcula todas as receitas e
 > despesas do mês e o saldo mensal, é possível ainda pesquisar por uma
 > categoria específica.
+
+[![apresentaçãoComoGastei](https://user-images.githubusercontent.com/22210171/93255364-340ebb80-f770-11ea-8181-2c25fa350df2.gif)](http://comogastei.herokuapp.com)
+
+Link do site: [Como Gastei](http://comogastei.herokuapp.com)
 
 ## Tecnologias
 
@@ -34,11 +39,10 @@ OS X | Linux | Windows:
 ```
 
 ## Próximas Implementações
-
-- [x] Implementar botões para avançar e retroceder um mês.
-- [ ] Implementar tags para busca, com as categorias das transações.
+- [x] Implementar busca por categoria
+- [ ] Implementar tags para busca, com as categorias das transações
 - [ ] Implementar toast para a interação com usuário após uma
-      operação.
+      operação
 
 ## Meta
 
