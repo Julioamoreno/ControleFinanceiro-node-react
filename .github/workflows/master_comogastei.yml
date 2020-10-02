@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - comogastei
+name: Build | deploy Node.js app | upload coverage reports - comogastei
 
 on:
   push:
@@ -17,8 +17,13 @@ jobs:
     steps:
     - uses: actions/checkout@master
       
+    - name: Set up Node.js version
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.13.0'
+      
     - name: Install Dependencies
-      run: yarn
+      uses: actions/s
         
     - name: Test 
       run: yarn test --coverage
