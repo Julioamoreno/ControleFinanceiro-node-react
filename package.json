@@ -19,7 +19,7 @@
 		"server": "nodemon index.js",
 		"start": "node index.js",
 		"test": "jest",
-		"build": "cd client && npm install && npm run build"
+		"build": "cd client && yarn && yarn build"
 	},
 	"nodemonConfig": {
 		"ignore": [
@@ -33,6 +33,6 @@
 		]
 	},
 	"engines": {
-		"node": "12.13.0"
+		"node": "12.x.x"
 	}
 }
